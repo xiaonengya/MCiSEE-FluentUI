@@ -6,6 +6,10 @@ on:
     - cron: 0 16 * * *
   workflow_dispatch:
 
+# 添加必要的权限
+permissions:
+  contents: write  # 允许提交代码
+
 jobs:
   update:
     name: Update Launcher

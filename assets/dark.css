@@ -1,7 +1,11 @@
 .background {
-    transform: scale(110%);
+    /* 移除transform以避免层叠上下文问题 */
+    /* transform: scale(110%); */
     filter: saturate(2);
     background-image: url('./image/dark.webp');
+    /* 使用background-size来代替transform缩放 */
+    background-size: 110% 110%;
+    background-position: center;
 }
 
 a {

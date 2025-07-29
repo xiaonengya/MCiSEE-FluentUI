@@ -8,20 +8,28 @@ const themeChanged = (() => {
         return;
     }
     localStorage.setItem('theme', value);
+    
+    // 移除所有主题类
+    $('body').removeClass('dark-theme light-theme');
+    $('body').removeAttr('data-theme');
+    
     switch (value) {
         case 'light':
             $('#theme').attr('href', 'assets/light.css');
+            $('body').addClass('light-theme').attr('data-theme', 'light');
             if($('style#classic').length) $('style').remove('#classic');
             $('[alt="Stars Over Time"]').attr('src', 'https://starchart.cc/teaSummer/MCiSEE.svg?background=%2300000000&axis=%23101010&line=%236b63ff');
             break;
         case 'dark':
             $('#theme').attr('href', 'assets/dark.css');
+            $('body').addClass('dark-theme').attr('data-theme', 'dark');
             if($('style#classic').length) $('style').remove('#classic');
             $('[alt="Stars Over Time"]').attr('src', 'https://starchart.cc/teaSummer/MCiSEE.svg?background=%2300000000&axis=%23ffffff&line=%236b63ff');
             break;
         case 'system':
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) system = 'dark';
             $('#theme').attr('href', `assets/${system}.css`);
+            $('body').addClass(`${system}-theme`).attr('data-theme', system);
             if($('style#classic').length) $('style').remove('#classic');
             $('[alt="Stars Over Time"]').attr('src', 'https://starchart.cc/teaSummer/MCiSEE.svg?background=%2300000000&axis=%23101010&line=%236b63ff');
             if (system == 'dark') {
@@ -37,6 +45,7 @@ const themeChanged = (() => {
     }
 </style>`;
             $('#theme').attr('href', 'assets/light.css');
+            $('body').addClass('light-theme').attr('data-theme', 'light');
             // document.adoptedStyleSheets.push(classic);
             // Object.isExtensible(document.adoptedStyleSheets) === false
             // on some browsers

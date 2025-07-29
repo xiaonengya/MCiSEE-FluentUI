@@ -1,0 +1,901 @@
+/* ========================================
+   FluentUI 样式增强 - 渐进式改�?
+   基于 Microsoft FluentUI 设计系统
+   在不破坏原有功能的基础上，增加现代化样�?
+   ======================================== */
+
+/* FluentUI 设计令牌系统 */
+:root {
+    /* 基础色彩 - 浅色主题 */
+    --fluent-bg-canvas: #f3f3f3;
+    --fluent-bg-surface: #ffffff;
+    --fluent-bg-layer: #f9f9f9;
+    --fluent-bg-hover: #f5f5f5;
+    --fluent-bg-pressed: #ebebeb;
+    
+    /* 强调�?*/
+    --fluent-accent: #0078d4;
+    --fluent-accent-hover: #106ebe;
+    --fluent-accent-pressed: #005a9e;
+    --fluent-accent-subtle: rgba(0, 120, 212, 0.1);
+    
+    /* 文本色彩 */
+    --fluent-text-primary: #202020;
+    --fluent-text-secondary: #616161;
+    --fluent-text-tertiary: #757575;
+    --fluent-text-on-accent: #ffffff;
+    
+    /* 边框和分割线 */
+    --fluent-stroke-subtle: #e5e5e5;
+    --fluent-stroke-strong: #d1d1d1;
+    --fluent-stroke-focus: var(--fluent-accent);
+    
+    /* 阴影系统 */
+    --fluent-shadow-2: 0 1px 3px rgba(0,0,0,0.1);
+    --fluent-shadow-4: 0 2px 8px rgba(0,0,0,0.12);
+    --fluent-shadow-8: 0 4px 16px rgba(0,0,0,0.14);
+    --fluent-shadow-16: 0 8px 32px rgba(0,0,0,0.16);
+    
+    /* 圆角系统 */
+    --fluent-radius-small: 4px;
+    --fluent-radius-medium: 8px;
+    --fluent-radius-large: 12px;
+    
+    /* 间距系统 */
+    --fluent-space-2: 2px;
+    --fluent-space-4: 4px;
+    --fluent-space-8: 8px;
+    --fluent-space-12: 12px;
+    --fluent-space-16: 16px;
+    --fluent-space-20: 20px;
+    --fluent-space-24: 24px;
+    --fluent-space-32: 32px;
+    
+    /* 动画时长 */
+    --fluent-duration-fast: 150ms;
+    --fluent-duration-normal: 250ms;
+    --fluent-duration-slow: 350ms;
+    
+    /* 缓动函数 */
+    --fluent-ease: cubic-bezier(0.33, 0, 0.67, 1);
+    --fluent-ease-out: cubic-bezier(0.15, 0, 0.25, 1);
+}
+
+/* 暗色主题适配 */
+[data-theme="dark"],
+body[data-theme="dark"] {
+    --fluent-bg-canvas: #202020;
+    --fluent-bg-surface: rgba(44, 44, 44, 0.85);
+    --fluent-bg-layer: rgba(40, 40, 40, 0.85);
+    --fluent-bg-hover: rgba(56, 56, 56, 0.85);
+    --fluent-bg-pressed: rgba(66, 66, 66, 0.85);
+    
+    --fluent-accent: #60cdff;
+    --fluent-accent-hover: #54b9eb;
+    --fluent-accent-pressed: #4ba5d7;
+    --fluent-accent-subtle: rgba(96, 205, 255, 0.15);
+    
+    --fluent-text-primary: #ffffff;
+    --fluent-text-secondary: #c8c8c8;
+    --fluent-text-tertiary: #a6a6a6;
+    --fluent-text-on-accent: #000000;
+    
+    --fluent-stroke-subtle: rgba(66, 66, 66, 0.6);
+    --fluent-stroke-strong: rgba(82, 82, 82, 0.8);
+    
+    --fluent-shadow-2: 0 1px 3px rgba(0,0,0,0.3);
+    --fluent-shadow-4: 0 2px 8px rgba(0,0,0,0.4);
+    --fluent-shadow-8: 0 4px 16px rgba(0,0,0,0.5);
+    --fluent-shadow-16: 0 8px 32px rgba(0,0,0,0.6);
+    
+    /* 毛玻璃透明�?*/
+    --fluent-glass-opacity: 0.15;
+    --fluent-glass-blur: 16px;
+}
+
+/* 浅色主题毛玻璃透明度调�?*/
+:root {
+    --fluent-glass-opacity: 0.15;
+    --fluent-glass-blur: 12px;
+}
+
+/* ========================================
+   基础样式优化 
+   ======================================== */
+
+/* 改进字体渲染 */
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: var(--fluent-text-primary) !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    /* 移除position: relative以避免影响MDUI定位计算 */
+    /* 移除backdrop-filter以避免创建新的层叠上下文 */
+}
+
+/* 暗色主题下的body背景 */
+body[data-theme="dark"],
+body.dark-theme {
+    background: rgba(32, 32, 32, 0.9) !important;
+}
+
+/* ========================================
+   侧边栏优�?- 完全覆盖原始样式，确保固定定�?
+   ======================================== */
+
+/* 重新设计目录 - 恢复📋目录显示，展开时文字在方框旁边 */
+#目录 {
+    /* 紧贴最右边 */
+    position: fixed !important;
+    top: calc(35vh) !important;
+    right: 0px !important;
+    z-index: 999 !important;
+    
+    /* 收起状态尺�?*/
+    width: 70px !important;
+    height: 32px !important;
+    padding: 6px 8px !important;
+    
+    /* 外观 */
+    background: var(--fluent-bg-surface) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(1.2) !important;
+    backdrop-filter: blur(8px) saturate(1.2) !important;
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    
+    /* 只有展开动画 */
+    transition: width 0.8s ease-in-out, height 0.8s ease-in-out !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    
+    /* 收起时横向布局 */
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+}
+
+/* 展开效果 - 展开时切换为纵向布局，显示方�?文字 */
+#目录:hover {
+    width: 180px !important;
+    height: 300px !important;
+    padding: 12px !important;
+    
+    /* 展开时改为纵向布局 */
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
+/* 暗色模式下的特殊处理 - 避免白光突兀 */
+body[data-theme="dark"] #目录,
+body.dark-theme #目录 {
+    background: rgba(44, 44, 44, 0.85) !important;
+    border-color: rgba(66, 66, 66, 0.6) !important;
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+}
+
+body[data-theme="dark"] #目录:hover,
+body.dark-theme #目录:hover {
+    background: rgba(44, 44, 44, 0.9) !important;
+    border-color: rgba(66, 66, 66, 0.8) !important;
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+}
+
+/* 目录标题 - 横向排列，透明背景，放在选项上方 */
+/* 恢复"📋目录"显示 */
+#目录 > info {
+    background: transparent !important;
+    border: none !important;
+    color: var(--fluent-text-primary) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    
+    /* 确保始终显示 */
+    display: flex !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+    /* 紧凑布局 */
+    white-space: nowrap !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    
+    /* 完全无动�?*/
+    transition: none !important;
+    transform: none !important;
+}
+
+/* 添加图标前缀 */
+#目录 > info::before {
+    content: '📋' !important;
+    margin-right: 4px !important;
+    font-size: 14px !important;
+}
+
+/* 目录列表 - 收起时隐藏，展开时显�?*/
+#目录 > dl {
+    /* 收起时隐�?*/
+    display: none !important;
+    margin: 8px 0 0 0 !important;
+    width: 100% !important;
+}
+
+#目录:hover > dl {
+    /* 展开时显示为纵向列表 */
+    display: block !important;
+}
+
+/* 目录链接 - 方框+文字的布局，一束一束列下来 */
+#目录 dt, #目录 dd {
+    margin: 2px 0 !important;
+    width: 100% !important;
+}
+
+#目录 dt a, #目录 dd a {
+    color: var(--fluent-text-primary) !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 4px 6px !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    
+    /* 完全移除悬停动画 */
+    transition: none !important;
+}
+
+/* 为每个链接添加方框图�?*/
+#目录 dt a::before {
+    content: '📁' !important;
+    margin-right: 6px !important;
+    font-size: 14px !important;
+    min-width: 20px !important;
+    font-weight: 600 !important;
+}
+
+#目录 dd a::before {
+    content: '📄' !important;
+    margin-right: 6px !important;
+    font-size: 12px !important;
+    min-width: 20px !important;
+    margin-left: 12px !important;
+}
+
+/* 主选项样式 */
+#目录 dt a {
+    font-weight: 600 !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 子选项样式 */
+#目录 dd a {
+    font-weight: 400 !important;
+    opacity: 0.9 !important;
+    margin-left: 8px !important;
+}
+
+#目录 dt a:hover, #目录 dd a:hover {
+    background: var(--fluent-bg-subtle) !important;
+}
+
+/* 移除点击和图标动画效�?*/
+#目录 dt a:active, #目录 dd a:active {
+    background-color: var(--fluent-bg-pressed) !important;
+    /* 移除动画 */
+}
+
+/* 图标样式 - 移除所有动�?*/
+#目录 dt::before, #目录 dd::before {
+    font-size: 14px !important;
+    margin-right: 6px !important;
+    color: var(--fluent-accent) !important;
+    display: inline-block !important;
+    /* 移除动画 */
+}
+
+/* ========================================
+   主内容区域优�?
+   ======================================== */
+
+/* 改进各个容器的样�?- 添加毛玻璃效�?*/
+.introduction,
+.device-container,
+.app-container,
+.website-container,
+.config-container {
+    background: var(--fluent-bg-surface) !important;
+    /* 暂时移除backdrop-filter以避免创建层叠上下文 */
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-medium) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    transition: all var(--fluent-duration-normal) var(--fluent-ease) !important;
+    margin: var(--fluent-space-24) 0 !important;
+    padding: var(--fluent-space-24) !important;
+    /* 统一宽度和对�?*/
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    /* 移除position: relative以避免影响MDUI定位计算 */
+}
+
+.introduction:hover,
+.device-container:hover,
+.app-container:hover,
+.website-container:hover,
+.config-container:hover {
+    box-shadow: var(--fluent-shadow-8) !important;
+    /* 暂时移除transform以避免创建层叠上下文 */
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 暗色主题下的容器悬停效果 */
+body[data-theme="dark"] .introduction:hover,
+body[data-theme="dark"] .device-container:hover,
+body[data-theme="dark"] .app-container:hover,
+body[data-theme="dark"] .website-container:hover,
+body[data-theme="dark"] .config-container:hover,
+body.dark-theme .introduction:hover,
+body.dark-theme .device-container:hover,
+body.dark-theme .app-container:hover,
+body.dark-theme .website-container:hover,
+body.dark-theme .config-container:hover {
+    background: rgba(44, 44, 44, 0.3) !important;
+}
+
+/* ========================================
+   按钮和表单控件优�?
+   ======================================== */
+
+/* 改进通用按钮样式 - 保持原有功能，移除可能影响定位的属�?*/
+.button {
+    background: var(--fluent-bg-surface) !important;
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    color: var(--fluent-text-primary) !important;
+    padding: var(--fluent-space-8) var(--fluent-space-16) !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    text-decoration: none !important;
+    /* 移除 display: inline-flex !important; 让JavaScript能够控制显示/隐藏 */
+    align-items: center !important;
+    font-weight: 500 !important;
+    min-height: 32px !important;
+}
+
+/* 当按钮可见时应用inline-flex布局 */
+.button:not([style*="display: none"]) {
+    display: inline-flex !important;
+}
+
+.button:hover {
+    background: var(--fluent-bg-hover) !important;
+    border-color: var(--fluent-stroke-strong) !important;
+    box-shadow: var(--fluent-shadow-4) !important;
+    /* 暂时移除transform以避免影响MDUI定位 */
+    color: var(--fluent-text-primary) !important;
+    text-decoration: none !important;
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+}
+
+.button:active {
+    background: var(--fluent-bg-pressed) !important;
+    /* 暂时移除transform以避免影响MDUI定位 */
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 下载按钮特殊样式 */
+.button.download {
+    background: var(--fluent-accent) !important;
+    border-color: var(--fluent-accent) !important;
+    color: var(--fluent-text-on-accent) !important;
+}
+
+.button.download:hover {
+    background: var(--fluent-accent-hover) !important;
+    border-color: var(--fluent-accent-hover) !important;
+    color: var(--fluent-text-on-accent) !important;
+}
+
+.button.download:active {
+    background: var(--fluent-accent-pressed) !important;
+    border-color: var(--fluent-accent-pressed) !important;
+}
+
+/* ========================================
+   MDUI 组件样式覆盖
+   ======================================== */
+
+/* 改进 MDUI 选择框样�?- 移除可能影响定位的属�?*/
+mdui-select {
+    --mdui-color-surface: var(--fluent-bg-surface) !important;
+    --mdui-color-on-surface: var(--fluent-text-primary) !important;
+    --mdui-color-outline: var(--fluent-stroke-subtle) !important;
+    --mdui-color-primary: var(--fluent-accent) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    /* 暂时移除backdrop-filter以避免影响定�?*/
+}
+
+mdui-select:hover {
+    box-shadow: var(--fluent-shadow-4) !important;
+    /* 暂时移除backdrop-filter以避免影响定�?*/
+}
+
+/* 改进 MDUI 按钮样式 - 移除可能影响定位的属�?*/
+mdui-button {
+    --mdui-color-surface: var(--fluent-bg-surface) !important;
+    --mdui-color-on-surface: var(--fluent-text-primary) !important;
+    --mdui-color-outline: var(--fluent-stroke-subtle) !important;
+    --mdui-color-primary: var(--fluent-accent) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    font-weight: 500 !important;
+    /* 暂时移除backdrop-filter以避免影响定�?*/
+}
+
+mdui-button:hover {
+    box-shadow: var(--fluent-shadow-4) !important;
+    /* 暂时移除transform以避免影响定�?*/
+    /* 暂时移除backdrop-filter以避免影响定�?*/
+}
+
+mdui-button:active {
+    /* 暂时移除transform以避免影响定�?*/
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 改进输入框样�?*/
+mdui-text-field {
+    --mdui-color-surface: var(--fluent-bg-surface) !important;
+    --mdui-color-on-surface: var(--fluent-text-primary) !important;
+    --mdui-color-outline: var(--fluent-stroke-subtle) !important;
+    --mdui-color-primary: var(--fluent-accent) !important;
+    border-radius: var(--fluent-radius-small) !important;
+}
+
+/* ========================================
+   公告栏优�?
+   ======================================== */
+
+/* 给主体内容添加顶部间距，确保与公告栏有空�?*/
+main.wait {
+    background: var(--fluent-bg-surface) !important;
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-large) !important;
+    box-shadow: var(--fluent-shadow-4) !important;
+    padding: var(--fluent-space-32) !important;
+    margin-top: 80px !important; /* 减少margin-top以避免不必要的滚�?*/
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: var(--fluent-space-24) !important;
+    /* 移除position: relative以避免影响MDUI定位计算 */
+    z-index: 1 !important;
+    /* 统一容器宽度 */
+    max-width: 1200px !important;
+    width: calc(100% - 40px) !important;
+    box-sizing: border-box !important;
+}
+
+/* 控制页面内容与公告栏的距�?*/
+.page-content {
+    padding-top: 30px !important;
+}
+
+
+/* 底部区域也需要调�?*/
+footer.wait {
+    margin-top: var(--fluent-space-24) !important;
+    padding-bottom: var(--fluent-space-32) !important;
+    /* 移除position: relative以避免影响MDUI定位计算 */
+    z-index: 1 !important;
+}
+
+/* ========================================
+   标题和分割线优化
+   ======================================== */
+
+h1, h2, h3 {
+    color: var(--fluent-text-primary) !important;
+    font-weight: 600 !important;
+}
+
+h2.page-title {
+    border-bottom: 2px solid var(--fluent-accent) !important;
+    padding-bottom: var(--fluent-space-8) !important;
+    margin-bottom: var(--fluent-space-20) !important;
+}
+
+hr {
+    border: none !important;
+    height: 1px !important;
+    background: var(--fluent-stroke-subtle) !important;
+    margin: var(--fluent-space-24) 0 !important;
+}
+
+/* ========================================
+   滚动条样式优�?
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--fluent-bg-layer);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--fluent-stroke-strong);
+    border-radius: 4px;
+    transition: background var(--fluent-duration-fast) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--fluent-text-tertiary);
+}
+
+/* ========================================
+   动画和过渡效�?
+   ======================================== */
+
+/* 页面加载动画 - 暂时移除transform以避免影响MDUI定位 */
+.wait {
+    opacity: 0;
+    /* 移除transform以避免创建新的层叠上下文 */
+    transition: opacity var(--fluent-duration-slow) var(--fluent-ease-out);
+}
+
+.wait[style*="display: block"] {
+    opacity: 1 !important;
+    /* 移除transform以避免创建新的层叠上下文 */
+}
+
+/* 通用悬停动画 - 暂时移除transform以避免影响MDUI定位 */
+.hover-lift {
+    /* 移除transform相关的transition */
+    transition: box-shadow var(--fluent-duration-fast) var(--fluent-ease);
+}
+
+/* .hover-lift:hover - 暂时注释掉以避免影响定位 */
+
+/* ========================================
+   响应式设计增�?
+   ======================================== */
+
+@media (max-width: 768px) {
+    /* 移动端优�?*/
+    main.wait {
+        margin-top: 100px !important;
+        margin-left: var(--fluent-space-16) !important;
+        margin-right: var(--fluent-space-16) !important;
+        padding: var(--fluent-space-20) !important;
+        width: calc(100% - 32px) !important;
+    }
+    
+    .introduction,
+    .device-container,
+    .app-container,
+    .website-container,
+    .config-container {
+        padding: var(--fluent-space-16) !important;
+        margin: var(--fluent-space-16) 0 !important;
+    }
+    
+    /* 移动端侧边栏保持原有功能 */
+    #目录 {
+        border-radius: var(--fluent-radius-medium) !important;
+    }
+}
+
+/* ========================================
+   辅助工具�?
+   ======================================== */
+
+/* 卡片样式 */
+.w11-card {
+    background: var(--fluent-bg-surface);
+    border: 1px solid var(--fluent-stroke-subtle);
+    border-radius: var(--fluent-radius-medium);
+    box-shadow: var(--fluent-shadow-2);
+    padding: var(--fluent-space-16);
+    transition: all var(--fluent-duration-normal) var(--fluent-ease);
+}
+
+.w11-card:hover {
+    box-shadow: var(--fluent-shadow-8);
+    transform: translateY(-2px);
+}
+
+/* 强调色文�?*/
+.w11-accent-text {
+    color: var(--fluent-accent) !important;
+}
+
+/* 次要文本 */
+.w11-secondary-text {
+    color: var(--fluent-text-secondary) !important;
+}
+
+/* ========================================
+   背景图片修复 - 确保完全固定不动
+   ======================================== */
+
+.background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important;
+    transform: none !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transition-duration: 0s !important;
+    transform-origin: left !important;
+}
+
+/* ========================================
+   确保兼容�?- 保持所有原有功能不受影�?
+   ======================================== */
+
+/* ========================================
+   动画关键帧定�?
+   ======================================== */
+
+/* 目录展开缩回动效 - 简洁的框框动画 */
+@keyframes directoryExpand {
+    from {
+        transform: scale(0.95);
+        max-height: 20px;
+    }
+    to {
+        transform: scale(1);
+        max-height: 1000px;
+    }
+}
+
+@keyframes directoryCollapse {
+    from {
+        transform: scale(1);
+        max-height: 1000px;
+    }
+    to {
+        transform: scale(0.95);
+        max-height: 20px;
+    }
+}
+
+/* 链接淡入动画 */
+@keyframes linkFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 为链接项添加错时淡入效果 */
+#目录:hover dt:nth-child(1), 
+#目录:hover dd:nth-child(1) {
+    animation: linkFadeIn 0.3s ease-out 0.1s both !important;
+}
+
+#目录:hover dt:nth-child(2), 
+#目录:hover dd:nth-child(2) {
+    animation: linkFadeIn 0.3s ease-out 0.2s both !important;
+}
+
+#目录:hover dt:nth-child(3), 
+#目录:hover dd:nth-child(3) {
+    animation: linkFadeIn 0.3s ease-out 0.3s both !important;
+}
+
+#目录:hover dt:nth-child(4), 
+#目录:hover dd:nth-child(4) {
+    animation: linkFadeIn 0.3s ease-out 0.4s both !important;
+}
+
+#目录:hover dt:nth-child(5), 
+#目录:hover dd:nth-child(5) {
+    animation: linkFadeIn 0.3s ease-out 0.5s both !important;
+}
+
+#目录:hover dt:nth-child(6), 
+#目录:hover dd:nth-child(6) {
+    animation: linkFadeIn 0.3s ease-out 0.6s both !important;
+}
+
+#目录:hover dt:nth-child(n+7), 
+#目录:hover dd:nth-child(n+7) {
+    animation: linkFadeIn 0.3s ease-out 0.7s both !important;
+}
+
+/* ========================================
+   经典模式适配 - 减少毛玻璃效�?
+   ======================================== */
+
+/* 经典模式下减少毛玻璃强度 */
+body:has(style#classic) .introduction,
+body:has(style#classic) .device-container,
+body:has(style#classic) .app-container,
+body:has(style#classic) .website-container,
+body:has(style#classic) .config-container,
+body:has(style#classic) #目录,
+body:has(style#classic) main.wait {
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+    background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 经典模式下的按钮和表单控�?*/
+body:has(style#classic) .button,
+body:has(style#classic) mdui-select,
+body:has(style#classic) mdui-button {
+    /* 暂时移除backdrop-filter以避免影响MDUI定位 */
+    background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ========================================
+   主题过渡动画
+   ======================================== */
+
+/* 主题切换时的平滑过渡 */
+body, 
+.introduction,
+.device-container,
+.app-container,
+.website-container,
+.config-container,
+#目录,
+main.wait,
+.button,
+mdui-select,
+mdui-button {
+    transition: background var(--fluent-duration-normal) var(--fluent-ease),
+                backdrop-filter var(--fluent-duration-normal) var(--fluent-ease),
+                color var(--fluent-duration-normal) var(--fluent-ease),
+                border-color var(--fluent-duration-normal) var(--fluent-ease) !important;
+}
+
+/* ========================================
+   搜索框和交互元素增强
+   ======================================== */
+
+/* 搜索框增强样�?*/
+mdui-text-field {
+    --mdui-color-surface: var(--fluent-bg-surface) !important;
+    --mdui-color-on-surface: var(--fluent-text-primary) !important;
+    --mdui-color-outline: var(--fluent-stroke-subtle) !important;
+    --mdui-color-primary: var(--fluent-accent) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+}
+
+mdui-text-field:hover {
+    --mdui-color-outline: var(--fluent-stroke-strong) !important;
+    box-shadow: var(--fluent-shadow-4) !important;
+}
+
+mdui-text-field:focus-within {
+    --mdui-color-outline: var(--fluent-accent) !important;
+    box-shadow: 0 0 0 3px var(--fluent-accent-subtle) !important;
+}
+
+/* 展开/收起按钮美化 */
+.to-unfold, .to-fold {
+    background: var(--fluent-bg-surface) !important;
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    padding: var(--fluent-space-4) var(--fluent-space-8) !important;
+    font-size: 12px !important;
+    /* 移除 color 设置，让原始的蓝色生�?*/
+    text-decoration: none !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    margin-left: var(--fluent-space-8) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 保持原始的显�?隐藏逻辑 */
+.to-unfold:not([style*="display: none"]), 
+.to-fold:not([style*="display: none"]) {
+    display: inline-block !important;
+}
+
+.to-unfold[style*="display: none"], 
+.to-fold[style*="display: none"] {
+    display: none !important;
+}
+
+.to-unfold:hover, .to-fold:hover {
+    background: var(--fluent-bg-hover) !important;
+    border-color: var(--fluent-stroke-strong) !important;
+    /* 移除 color 设置，让原始的悬停颜色生�?*/
+    box-shadow: var(--fluent-shadow-4) !important;
+}
+
+.to-unfold:active, .to-fold:active {
+    background: var(--fluent-bg-pressed) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 站内搜索链接和搜索按钮美�?*/
+.inline-link {
+    background: var(--fluent-bg-surface) !important;
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    padding: var(--fluent-space-4) var(--fluent-space-8) !important;
+    font-size: 12px !important;
+    /* 移除 color 设置，让原始的蓝色生�?*/
+    text-decoration: none !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    margin-right: var(--fluent-space-8) !important;
+}
+
+.inline-link:hover {
+    background: var(--fluent-bg-hover) !important;
+    border-color: var(--fluent-stroke-strong) !important;
+    /* 移除 color 设置，让原始的悬停颜色生�?*/
+    box-shadow: var(--fluent-shadow-4) !important;
+}
+
+.inline-link:active {
+    background: var(--fluent-bg-pressed) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 快速查询跳转链接美�?*/
+.searchable-goto {
+    background: var(--fluent-bg-surface) !important;
+    border: 1px solid var(--fluent-stroke-subtle) !important;
+    border-radius: var(--fluent-radius-small) !important;
+    padding: var(--fluent-space-4) var(--fluent-space-8) !important;
+    font-size: 12px !important;
+    /* 移除 color 设置，让原始的蓝色生�?*/
+    text-decoration: none !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+    margin-left: var(--fluent-space-8) !important;
+}
+
+.searchable-goto:hover {
+    background: var(--fluent-bg-hover) !important;
+    border-color: var(--fluent-stroke-strong) !important;
+    /* 移除 color 设置，让原始的悬停颜色生�?*/
+    box-shadow: var(--fluent-shadow-4) !important;
+}
+
+.searchable-goto:active {
+    background: var(--fluent-bg-pressed) !important;
+    box-shadow: var(--fluent-shadow-2) !important;
+}
+
+/* 搜索按钮增强 */
+.searchable-button {
+    box-shadow: var(--fluent-shadow-2) !important;
+    transition: all var(--fluent-duration-fast) var(--fluent-ease) !important;
+}
+
+.searchable-button:hover:not([disabled]) {
+    box-shadow: var(--fluent-shadow-4) !important;
+}

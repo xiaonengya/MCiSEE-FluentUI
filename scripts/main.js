@@ -480,6 +480,12 @@ $(() => {
             $(e).click();
         });
     });
+    
+    // 为设备选择器添加change事件监听器
+    $('.device-list').on('change', function() {
+        console.log('设备选择器change事件触发:', $(this).val());
+        deviceChanged();
+    });
     // 启动器 初始化
     $('mdui-select.launcher-list').each((i, e) => {
         $(e).val('');

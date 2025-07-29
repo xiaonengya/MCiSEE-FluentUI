@@ -400,14 +400,11 @@ main>div {
 }
 
 #目录 dt::before {
-    content: '◼ ';
-    font-family: 'Segoe UI Emoji';
+    display: none;
 }
 
 #目录 dd::before {
-    content: '◻ ';
-    margin-left: 6px;
-    font-family: 'Segoe UI Emoji';
+    display: none;
 }
 
 hr {

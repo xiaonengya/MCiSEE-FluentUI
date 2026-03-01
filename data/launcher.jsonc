@@ -88,8 +88,8 @@
       "github": "https://github.com/HMCL-dev/HMCL",
       "url": "https://hmcl.huangyuhui.net",
       "dev": {
-        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.11.2/HMCL-3.11.2.exe",
-        "version": "3.11.2"
+        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.12.0.330/HMCL-3.12.0.330.exe",
+        "version": "3.12.0.330"
       }
     },
     {
@@ -212,8 +212,8 @@
       "github": "https://github.com/HMCL-dev/HMCL",
       "url": "https://hmcl.huangyuhui.net",
       "dev": {
-        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.11.2/HMCL-3.11.2.sh",
-        "version": "3.11.2"
+        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.12.0.330/HMCL-3.12.0.330.sh",
+        "version": "3.12.0.330"
       }
     },
     {
@@ -273,8 +273,8 @@
       "github": "https://github.com/HMCL-dev/HMCL",
       "url": "https://hmcl.huangyuhui.net",
       "dev": {
-        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.11.2/HMCL-3.11.2.sh",
-        "version": "3.11.2"
+        "download": "https://github.com/HMCL-dev/HMCL/releases/download/v3.12.0.330/HMCL-3.12.0.330.sh",
+        "version": "3.12.0.330"
       }
     },
     {

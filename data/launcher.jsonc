@@ -114,8 +114,8 @@
     },
     {
       "title": "ColorMC",
-      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260305-1/colormc-x64.msi",
-      "version": "ersion-40-20260305-1",
+      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260311/colormc-x64.msi",
+      "version": "ersion-40-20260311",
       "github": "https://github.com/Coloryr/ColorMC"
     },
     {
@@ -218,8 +218,8 @@
     },
     {
       "title": "ColorMC",
-      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260305-1/colormc-ersion-40-20260305-1-1-x86_64.pkg.tar.zst",
-      "version": "ersion-40-20260305-1",
+      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260311/colormc-ersion-40-20260311-1-x86_64.pkg.tar.zst",
+      "version": "ersion-40-20260311",
       "github": "https://github.com/Coloryr/ColorMC"
     },
     {
@@ -279,8 +279,8 @@
     },
     {
       "title": "ColorMC",
-      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260305-1/colormc-linux-a34-x86_64.AppImage",
-      "version": "ersion-40-20260305-1",
+      "download": "https://github.com/Coloryr/ColorMC/releases/download/ersion-40-20260311/colormc-linux-a34-x86_64.AppImage",
+      "version": "ersion-40-20260311",
       "github": "https://github.com/Coloryr/ColorMC"
     },
     {
